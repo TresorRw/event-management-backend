@@ -7,10 +7,12 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import { expressMiddleware } from "@apollo/server/express4";
 import resolvers from "./Schemas/Resolvers.js";
 import typeDefs from "./Schemas/typeDefs.js";
+import mongoose from "mongoose";
 
 config();
 const app: Application = express();
-const port = process.env.PORT
+const port = process.env.PORT;
+const DB_URL = process.env.DB_URL as string;
 const httpServer = http.createServer(app);
 
 // Middlewares
@@ -22,7 +24,15 @@ const server = new ApolloServer({
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })]
 });
 
+// Connecting to database
 await server.start();
 app.use('/graphql', expressMiddleware(server))
 
-app.listen(port, () => console.log(`🚀 running on http://localhost:${port}/graphql`))
+mongoose.
+    connect(DB_URL)
+    .then(() => {
+        app.listen(port, () => console.log(`🚀 running on http://localhost:${port}/graphql`))
+    })
+    .catch((error => {
+        console.log(`❌ Failed to connect with database`)
+    }))
