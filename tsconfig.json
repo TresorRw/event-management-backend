@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2017",                                 
+    "module": "ESNext",                                
+    "rootDir": "./src/",                                 
+    "moduleResolution": "nodenext",
+    "outDir": "./dist/",                                   
+    "esModuleInterop": true,                             
+    "forceConsistentCasingInFileNames": true,           
+    "strict": true,                                      
+    "noImplicitAny": false,                            
+    "skipLibCheck": true                                
+  }
+}
