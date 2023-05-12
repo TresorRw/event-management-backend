@@ -9,11 +9,11 @@ const userSchema = new mongoose.Schema({
     password: String,
     contact: String,
     userType: String
-})
+}, { timestamps: true })
 
 userSchema.pre('save', async function (next) {
-    const salt = bcrypt.genSalt();
-    this.password= await bcrypt.hash(this.password, salt)
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password as string, salt)
     next();
 })
 

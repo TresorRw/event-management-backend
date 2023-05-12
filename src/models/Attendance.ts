@@ -4,10 +4,10 @@ const attendanceSchema = new mongoose.Schema({
     event_id: String,
     attendee_id: String,
     subDate: {
-        type: String, 
+        type: String,
         default: new Date().toLocaleString()
     }
-});
+}, { timestamps: true });
 
 
 const Attendance = mongoose.model("attendance", attendanceSchema);
