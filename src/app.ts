@@ -34,5 +34,5 @@ mongoose.
         app.listen(port, () => console.log(`🚀 running on http://localhost:${port}/graphql`))
     })
     .catch((error => {
-        console.log(`❌ Failed to connect with database`)
+        console.log(`❌ Failed to connect with database due to: ${error.message}`)
     }))
