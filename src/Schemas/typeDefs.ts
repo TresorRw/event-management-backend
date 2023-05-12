@@ -6,10 +6,16 @@ const typeDefs = `#graphql
         userType: String
     }
 
+    type UserInfo {
+        token: String!
+        userType: String!
+    }
+
     # user messages
     type GeneralUserMessage {
         message: String!
         data: User
+        info: UserInfo
     }
 
     type Event {
@@ -39,6 +45,7 @@ const typeDefs = `#graphql
     # Mutations
     type Mutation {
         registerUser(username:String!, password: String!, contact: String!, userType: String!): GeneralUserMessage!
+        loginUser(username: String!, password: String!): GeneralUserMessage!
     }
 `;
 
