@@ -47,7 +47,7 @@ const resolvers = {
                 }
             }
         },
-        async loginUser(parent, args: logUser, contextValue) {
+        async loginUser(parent, args: logUser) {
             const userData = { username: args.username, password: args.password }
             const checkUser = await Users.findOne({ username: userData.username });
             if (checkUser) {
