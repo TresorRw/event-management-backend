@@ -9,26 +9,13 @@ import resolvers from "./Schemas/Resolvers.js";
 import typeDefs from "./Schemas/typeDefs.js";
 import mongoose, { ConnectOptions } from "mongoose";
 import { decode } from "./middlewares/tokenVerifier.js";
+import { resolveToken } from "./middlewares/resolveToken.js";
 
 config();
 const app: Application = express();
 const port = process.env.PORT;
 const DB_URL = process.env.LOCAL_DB_URL as string;
 const httpServer = http.createServer(app);
-
-function resolveToken(authorizationHeader?: string) {
-    if (!authorizationHeader) {
-        return undefined;
-    }
-    let token:string;
-    if (authorizationHeader.includes("Bearer")) {
-        token = authorizationHeader.replace(/^Bearer/i, '')
-    } else {
-        token = authorizationHeader
-    }
-    return token;
-}
-
 
 // Middlewares
 app.use(cors());
