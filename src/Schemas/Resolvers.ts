@@ -1,4 +1,4 @@
-import { registerUser, logUser, EventDetails } from "../interfaces/GlobalInterfaces.js";
+import { registerUser, logUser, EventDetails, SearchKeyWord } from "../interfaces/GlobalInterfaces.js";
 import { encode } from "../middlewares/tokenVerifier.js";
 import Attendance from "../models/Attendance.js";
 import Events from "../models/Event.js";
@@ -20,6 +20,17 @@ const resolvers = {
             const attendance = await Attendance.find()
             return attendance
         },
+        async searchEvents(_, args: SearchKeyWord) {
+            const { keyword } = args;
+            const newRegex = (pattern) => new RegExp(`.*${pattern}.*`);
+            const searchRgx = newRegex(keyword);
+            try {
+                const findMatches = await Events.find({ $or: [{ name: { $regex: searchRgx, $options: "i" } }, { location: { $regex: searchRgx, $options: "i" } }] });
+                return { message: `Events that math with: ${keyword}`, results: findMatches }
+            } catch (error) {
+                return { message: "We can not find matches" }
+            }
+        }
     },
     Mutation: {
         async registerUser(parent, args: registerUser) {
@@ -80,7 +91,7 @@ const resolvers = {
                     const checkExistance = await Events.findOne({ _id: eventId, organizer_id: user.id });
                     const newEvent = { name: args.name, location: args.location, duration: args.duration, date_time: args.date_time, description: args.description }
                     try {
-                        const changeEvent = await checkExistance?.updateOne(newEvent);
+                        await checkExistance?.updateOne(newEvent);
                         return { message: "Your event has been updated" }
                     } catch (errors) {
                         return { message: "Problem while updating, try again." }

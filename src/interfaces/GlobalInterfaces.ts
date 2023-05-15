@@ -21,3 +21,7 @@ export interface EventDetails {
 export interface AppContext {
     token?: String;
 }
+
+export interface SearchKeyWord {
+    keyword: String
+}

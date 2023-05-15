@@ -41,11 +41,17 @@ const typeDefs = `#graphql
         subDate: String!
     }
 
+    type SearchResults {
+        message: String!
+        results: [Event!]
+    }
+
     # Queries
     type Query {
         getUsers: [User!]
         getEvents: [Event!]
         getAttendance: [Attendance!]
+        searchEvents(keyword: String!): SearchResults!
     }
 
     # Mutations
