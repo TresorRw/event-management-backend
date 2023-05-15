@@ -10,6 +10,7 @@ import typeDefs from "./Schemas/typeDefs.js";
 import mongoose, { ConnectOptions } from "mongoose";
 import { decode } from "./middlewares/tokenVerifier.js";
 import { resolveToken } from "./middlewares/resolveToken.js";
+import { AppContext } from "./interfaces/GlobalInterfaces.js";
 
 config();
 const app: Application = express();
@@ -20,10 +21,6 @@ const httpServer = http.createServer(app);
 // Middlewares
 app.use(cors());
 app.use(express.json());
-
-interface AppContext {
-    token?: String;
-}
 
 const server = new ApolloServer<AppContext>({
     typeDefs, resolvers,

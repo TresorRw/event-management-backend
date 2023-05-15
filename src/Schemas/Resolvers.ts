@@ -1,28 +1,10 @@
-import { decode, encode } from "../middlewares/tokenVerifier.js";
+import { registerUser, logUser, EventDetails } from "../interfaces/GlobalInterfaces.js";
+import { encode } from "../middlewares/tokenVerifier.js";
 import Attendance from "../models/Attendance.js";
 import Events from "../models/Event.js";
 import Users from "../models/User.js";
 import bcrypt from "bcrypt";
 import Cookies from "js-cookie";
-
-interface registerUser {
-    username: string,
-    password: string,
-    contact: string,
-    userType: string
-}
-interface logUser {
-    username: string,
-    password: string
-}
-
-interface EventDetails {
-    name: string,
-    date_time: string,
-    duration: string,
-    location: string,
-    description: string,
-}
 
 const resolvers = {
     Query: {
