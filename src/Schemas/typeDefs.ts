@@ -26,6 +26,7 @@ const typeDefs = `#graphql
         location: String!
         description: String!
         organizer_id: String!
+        organizer: User!
     }
 
     # Events messages
@@ -37,6 +38,8 @@ const typeDefs = `#graphql
     type Attendance {
         id: String!
         event_id: String!
+        event: Event!
+        subscribers: User!
         attendee_id: String!
         subDate: String!
     }
@@ -45,7 +48,7 @@ const typeDefs = `#graphql
         message: String!
         results: [Event!]
     }
-
+    
     # Queries
     type Query {
         getUsers: [User!]
@@ -61,6 +64,7 @@ const typeDefs = `#graphql
         createEvent(name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
         updateEvent(event_id: String!, name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
         deleteEvent(event_id: String!): GeneralEventMessage!
+        subscribeToEvent(event_id: String!): GeneralEventMessage!
     }
 `;
 

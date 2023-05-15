@@ -30,6 +30,22 @@ const resolvers = {
             } catch (error) {
                 return { message: "We can not find matches" }
             }
+        },
+    },
+    Event: {
+        organizer: async (parent) => {
+            const all = await Users.findById(parent.organizer_id)
+            return { username: all?.username, contact: all?.contact, id: all?.id, userType: all?.userType }
+        }
+    },
+    Attendance: {
+        event: async (parent) => {
+            const checkEvs = await Events.findById(parent.event_id);
+            return {name: checkEvs?.name,location: checkEvs?.location, duration: checkEvs?.duration, description: checkEvs?.description, organizer_id: checkEvs?.organizer_id, date_time: checkEvs?.date_time}
+        },
+        subscribers: async (parent) => {
+            const checkSubs = await Users.findById(parent.attendee_id)
+            return {username: checkSubs?.username, contact: checkSubs?.contact, userType: checkSubs?.userType};
         }
     },
     Mutation: {
@@ -119,6 +135,30 @@ const resolvers = {
                     return { message: "We can not find the event in your account" }
                 }
 
+            }
+        },
+        async subscribeToEvent(parent, args, contextValue) {
+            const user = contextValue.user;
+            if (!user) {
+                return { message: "You are not authenticated, please login first." }
+            }
+            const eventId = args.event_id;
+            if (user.userType !== "Attendee") {
+                return { message: "You must be an event Attendee" }
+            } else {
+                try {
+                    await Events.findById(eventId);
+                    try {
+                        const checkAlready = await Attendance.find({ event_id: eventId, attendee_id: user.id });
+                        if (checkAlready.length > 0) return { message: "You have already registered to this event." }
+                        await Attendance.create({ event_id: eventId, attendee_id: user.id })
+                        return { message: "Invitation created successfully" };
+                    } catch (e) {
+                        return { message: "Invitation error" }
+                    }
+                } catch (error) {
+                    return { message: `Event ID: ${eventId} does not exist, check again!` }
+                }
             }
         }
     }
