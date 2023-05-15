@@ -55,7 +55,7 @@ const resolvers = {
         async createEvent(parent, args: EventDetails, contextValue) {
             const user = contextValue.user;
             if (!user) {
-                return {message: "You are not authenticated, please login first."}
+                return { message: "You are not authenticated, please login first." }
             }
             if (user.userType !== "Organizer") {
                 return { message: "You must be an event organizer" }
@@ -65,6 +65,30 @@ const resolvers = {
                 if (saveEvent) {
                     return { message: "Event saved successfully", data: saveEvent }
                 }
+            }
+        },
+        async updateEvent(parent, args: EventDetails, contextValue) {
+            const user = contextValue.user;
+            if (!user) {
+                return { message: "You are not authenticated, please login first." }
+            }
+            const eventId = args.event_id;
+            if (user.userType !== "Organizer") {
+                return { message: "You must be an event organizer" }
+            } else {
+                try {
+                    const checkExistance = await Events.findOne({ _id: eventId, organizer_id: user.id });
+                    const newEvent = { name: args.name, location: args.location, duration: args.duration, date_time: args.date_time, description: args.description }
+                    try {
+                        const changeEvent = await checkExistance?.updateOne(newEvent);
+                        return {message: "Your event has been updated"}
+                    } catch (errors) {
+                        return { message: "Problem while updating, try again." }
+                    }
+                } catch (err) {
+                    return { message: "We can not find the event in your account" }
+                }
+
             }
         }
     }

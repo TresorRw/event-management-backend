@@ -10,6 +10,7 @@ export interface logUser {
 }
 
 export interface EventDetails {
+    event_id?: string,
     name: string,
     date_time: string,
     duration: string,

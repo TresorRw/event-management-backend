@@ -53,6 +53,7 @@ const typeDefs = `#graphql
         registerUser(username:String!, password: String!, contact: String!, userType: String!): GeneralUserMessage!
         loginUser(username: String!, password: String!): GeneralUserMessage!
         createEvent(name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
+        updateEvent(event_id: String!, name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
     }
 `;
 
