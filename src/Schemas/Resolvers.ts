@@ -1,9 +1,8 @@
-import { encode } from "../middlewares/tokenVerifier.js";
+import { decode, encode } from "../middlewares/tokenVerifier.js";
 import Attendance from "../models/Attendance.js";
 import Events from "../models/Event.js";
 import Users from "../models/User.js";
 import bcrypt from "bcrypt";
-// import { Request, Response } from "express";
 import Cookies from "js-cookie";
 
 interface registerUser {
@@ -15,6 +14,14 @@ interface registerUser {
 interface logUser {
     username: string,
     password: string
+}
+
+interface EventDetails {
+    name: string,
+    date_time: string,
+    duration: string,
+    location: string,
+    description: string,
 }
 
 const resolvers = {
@@ -53,14 +60,29 @@ const resolvers = {
             if (checkUser) {
                 const isPasswordTrue = await bcrypt.compare(userData.password, checkUser.password as string)
                 if (isPasswordTrue) {
-                    const token:string = encode({ id: checkUser.id, username: checkUser.username, userType: checkUser.userType, contact: checkUser.contact });
-                    Cookies.set("token", token, {expires: 7});
+                    const token: string = encode({ id: checkUser.id, username: checkUser.username, userType: checkUser.userType, contact: checkUser.contact });
+                    Cookies.set("token", token, { expires: 7 });
                     return { message: "Login successfully!", info: { token, userType: checkUser.userType } }
                 } else {
                     return { message: "Please correct your password!" }
                 }
             } else {
                 return { message: "Your credentals are not related to any user!" }
+            }
+        },
+        async createEvent(parent, args: EventDetails, contextValue) {
+            const user = contextValue.user;
+            if (!user) {
+                return {message: "You are not authenticated, please login first."}
+            }
+            if (user.userType !== "Organizer") {
+                return { message: "You must be an event organizer" }
+            } else {
+                const newEvent = { name: args.name, location: args.location, duration: args.duration, date_time: args.date_time, description: args.description, organizer_id: user.id }
+                const saveEvent = await Events.create(newEvent);
+                if (saveEvent) {
+                    return { message: "Event saved successfully", data: saveEvent }
+                }
             }
         }
     }

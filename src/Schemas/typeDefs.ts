@@ -28,6 +28,12 @@ const typeDefs = `#graphql
         organizer_id: String!
     }
 
+    # Events messages
+    type GeneralEventMessage {
+        message: String!
+        data: Event
+    }
+
     type Attendance {
         id: String!
         event_id: String!
@@ -46,6 +52,7 @@ const typeDefs = `#graphql
     type Mutation {
         registerUser(username:String!, password: String!, contact: String!, userType: String!): GeneralUserMessage!
         loginUser(username: String!, password: String!): GeneralUserMessage!
+        createEvent(name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
     }
 `;
 

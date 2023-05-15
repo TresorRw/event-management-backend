@@ -4,7 +4,7 @@ export function resolveToken(authorizationHeader?: string) {
     }
     let token:string;
     if (authorizationHeader.includes("Bearer")) {
-        token = authorizationHeader.replace(/^Bearer/i, '')
+        token = authorizationHeader.split(" ")[1];
     } else {
         token = authorizationHeader
     }

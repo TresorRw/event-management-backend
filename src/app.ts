@@ -34,9 +34,13 @@ const server = new ApolloServer<AppContext>({
 await server.start();
 app.use('/graphql', expressMiddleware(server, {
     context: async ({ req, res }) => {
-        const token = resolveToken(req.headers["authorization"]);
-        const user = await decode(token as string);
-        return { user };
+        const token = resolveToken(req.headers.authorization);
+        if (token) {
+            const loggedUser = decode(token)
+            return (loggedUser)? { user: loggedUser} : {user: null}
+        } else {
+            return { loggedUser: null }
+        }
     },
 }))
 
