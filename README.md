@@ -13,7 +13,7 @@ Table of Contents
       - [Run The Service](#run-the-service)
 
 # Description
-An event management platform that allows users to create and manage events. You can use GraphQL to implement features like event registration, attendee management, and event search.
+An event management platform that allows users to create and manage events. I used GraphQL to implement features like event registration, attendee management, and event search.
 
 ## Documentation
 
