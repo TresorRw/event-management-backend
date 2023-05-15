@@ -35,7 +35,7 @@ This project have only one endpoint available for every single request.
 - nodemon
 
 ### Folder Structure
-
+```
 ┣ 📂src
  ┃ ┣ 📂Schemas
  ┃ ┣ 📂interfaces
@@ -48,7 +48,7 @@ This project have only one endpoint available for every single request.
  ┣ 📜package-lock.json
  ┣ 📜package.json
  ┗ 📜tsconfig.json
-
+```
 ### Getting Started
 
 #### Cloning the project
