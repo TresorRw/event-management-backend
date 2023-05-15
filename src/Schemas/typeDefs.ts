@@ -54,6 +54,7 @@ const typeDefs = `#graphql
         loginUser(username: String!, password: String!): GeneralUserMessage!
         createEvent(name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
         updateEvent(event_id: String!, name: String!, date_time: String!, duration: String!, location: String!, description: String!): GeneralEventMessage!
+        deleteEvent(event_id: String!): GeneralEventMessage!
     }
 `;
 
