@@ -1,6 +1,7 @@
 ### Event management system
 This REPO contains all of the functionalities to serve frontend for this project
 
+Table of Contents
 - [Description](#description)
   - [Documentation](#documentation)
   - [Setup](#setup)
