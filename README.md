@@ -1,6 +1,15 @@
 ### Event management system
 This REPO contains all of the functionalities to serve frontend for this project
 
+- [Description](#description)
+  - [Documentation](#documentation)
+  - [Setup](#setup)
+    - [Dependencies](#dependencies)
+    - [Getting Started](#getting-started)
+      - [Cloning the project](#cloning-the-project)
+      - [Installing dependencies](#installing-dependencies)
+      - [Run The Service](#run-the-service)
+
 # Description
 An event management platform that allows users to create and manage events. You can use GraphQL to implement features like event registration, attendee management, and event search.
 
@@ -39,15 +48,3 @@ npm i
 ```bash
 npm start
 ```
-
-### Microservices
-
-List out the microservices if any that this repo uses
-
-## Testing
-
-
-## Contribute
-
-
-## Deployment
