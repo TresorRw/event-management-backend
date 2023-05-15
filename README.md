@@ -6,6 +6,7 @@ Table of Contents
   - [Documentation](#documentation)
   - [Setup](#setup)
     - [Dependencies](#dependencies)
+    - [Folder Structure](#folder-structure)
     - [Getting Started](#getting-started)
       - [Cloning the project](#cloning-the-project)
       - [Installing dependencies](#installing-dependencies)
@@ -32,6 +33,21 @@ This project have only one endpoint available for every single request.
 - dotenv
 - mongoose
 - nodemon
+
+### Folder Structure
+
+┣ 📂src
+ ┃ ┣ 📂Schemas
+ ┃ ┣ 📂interfaces
+ ┃ ┣ 📂middlewares
+ ┃ ┣ 📂models
+ ┃ ┗ 📜app.ts
+ ┣ 📜.env.example
+ ┣ 📜.gitignore
+ ┣ 📜README.md
+ ┣ 📜package-lock.json
+ ┣ 📜package.json
+ ┗ 📜tsconfig.json
 
 ### Getting Started
 
