@@ -7,7 +7,7 @@ Table of Contents
   - [Setup](#setup)
     - [Dependencies](#dependencies)
     - [Folder Structure](#folder-structure)
-    - [Getting Started](#getting-started)
+  - [Getting Started](#getting-started)
       - [Cloning the project](#cloning-the-project)
       - [Installing dependencies](#installing-dependencies)
       - [Run The Service](#run-the-service)
@@ -45,7 +45,7 @@ This project have only one endpoint available for every single request.
  ┣ 📂models             # All mongoose models to interact with our features
  ┗ 📜app.ts 
 ```
-### Getting Started
+## Getting Started
 
 #### Cloning the project
 ```bash
