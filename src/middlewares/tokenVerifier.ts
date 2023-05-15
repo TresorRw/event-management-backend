@@ -12,6 +12,6 @@ export const decode = (token: string) => {
         const data = jwt.verify(token, process.env.JWT_SECRET as string)
         return data;
     } catch (erro) {
-        console.log(`Error`, erro)
+        console.log(`Error`)
     }
 }
