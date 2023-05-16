@@ -34,7 +34,7 @@ app.use('/graphql', expressMiddleware(server, {
         const token = resolveToken(req.headers.authorization);
         if (token) {
             const loggedUser = decode(token)
-            return (loggedUser)? { user: loggedUser} : {user: null}
+            return (loggedUser) ? { user: loggedUser } : { user: null }
         } else {
             return { loggedUser: null }
         }

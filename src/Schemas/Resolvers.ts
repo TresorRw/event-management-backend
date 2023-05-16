@@ -41,11 +41,11 @@ const resolvers = {
     Attendance: {
         event: async (parent) => {
             const checkEvs = await Events.findById(parent.event_id);
-            return {name: checkEvs?.name,location: checkEvs?.location, duration: checkEvs?.duration, description: checkEvs?.description, organizer_id: checkEvs?.organizer_id, date_time: checkEvs?.date_time}
+            return { name: checkEvs?.name, location: checkEvs?.location, duration: checkEvs?.duration, description: checkEvs?.description, organizer_id: checkEvs?.organizer_id, date_time: checkEvs?.date_time }
         },
         subscribers: async (parent) => {
             const checkSubs = await Users.findById(parent.attendee_id)
-            return {username: checkSubs?.username, contact: checkSubs?.contact, userType: checkSubs?.userType};
+            return { username: checkSubs?.username, contact: checkSubs?.contact, userType: checkSubs?.userType };
         }
     },
     Mutation: {
