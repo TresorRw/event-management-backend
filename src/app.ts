@@ -15,7 +15,7 @@ import { AppContext } from "./interfaces/GlobalInterfaces.js";
 config();
 const app: Application = express();
 const port = process.env.PORT;
-const DB_URL = process.env.LOCAL_DB_URL as string;
+const DB_URL = process.env.DB_URL as string;
 const httpServer = http.createServer(app);
 
 // Middlewares
