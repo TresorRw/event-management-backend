@@ -67,7 +67,7 @@ const resolvers = {
             const userData = { username: args.username, password: args.password }
             const checkUser = await Users.findOne({ username: userData.username });
             if (checkUser) {
-                const isPasswordTrue = await bcrypt.compare(userData.password, checkUser.password as string)
+                const isPasswordTrue:boolean = await bcrypt.compare(userData.password, checkUser.password as string)
                 if (isPasswordTrue) {
                     const token: string = encode({ id: checkUser.id, username: checkUser.username, userType: checkUser.userType, contact: checkUser.contact });
                     Cookies.set("token", token, { expires: 7 });

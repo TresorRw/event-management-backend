@@ -37,13 +37,11 @@ This project have only one endpoint available for every single request.
 ### Folder Structure
 ```
 📦src
- ┣ 📂Schemas            #GraphQL Schemas
- ┃ ┣ 📜Resolvers.ts     # All resolvers
- ┃ ┗ 📜typeDefs.ts      # All type definitions
- ┣ 📂interfaces         # All interfaces for `ts`
- ┣ 📂middlewares        # All middlewares to interact with verifications
- ┣ 📂models             # All mongoose models to interact with our features
- ┗ 📜app.ts 
+ ┣ 📂Schemas
+ ┣ 📂interfaces
+ ┣ 📂middlewares
+ ┣ 📂models
+ ┗ 📜app.ts
 ```
 ## Getting Started
 
